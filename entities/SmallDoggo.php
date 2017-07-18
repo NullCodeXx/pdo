@@ -22,7 +22,7 @@ class SmallDoggo {
     
     function __construct(string $Name,
             string $Race,
-            \DateTime$Birthdate,
+            \DateTime$Birthdate, // l'anti slash sert a revenir en arrière comme le cmd vus que DateTime est un object et non un type.
             bool $Isgood,
             int $Id = NULL) {
         $this->Name = $Name;

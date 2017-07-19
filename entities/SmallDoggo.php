@@ -31,8 +31,4 @@ class SmallDoggo {
         $this->Isgood = $Isgood;
         $this->Id = $Id;
     }
-
-    
-  
-
 }

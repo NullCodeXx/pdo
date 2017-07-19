@@ -13,6 +13,10 @@ spl_autoload_register("myLoader");
 //Le Use sert a utiliser le nameSpace dossier entities
 use entities\SmallDoggo;
 
+//Vérifie si la class Smalldoggo recupere les valeurque l'on lui ajoute.
+//var_dump(new SmallDoggo('test', 'test', new DateTime(), false));
+
+
 //Ajouter un user et un mdp 
 
 //CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
@@ -41,7 +45,7 @@ $query = $db->query("SELECT * FROM petit_chien");
 
 //Servira a faire un pripert mais pas necessaire 
 ////pour l'éxécution puisqu'il s'éxécute automatiquement. .
-$query->execute();
+//$query->execute();
 //On récupère la valeur d'une cologne.    
 //le $query->fetchALL() renvoie un tableau qui contient tout.
 //echo "<ul><li>" . $query->fetch()["name"] . "</li></ul>";
@@ -58,17 +62,25 @@ $query->execute();
  * foreach($query as $value) {
  * echo $value["name"]; pas sur que sa marche. }
  */
+$chiens = [];
 while($ligne = $query->fetch()) {
     //Crée des instance de chien a partir des lignes.
-    echo "<ul>";
-    echo "<li>" . $ligne["id"] ."</li>";
-    echo "<li>" . $ligne["name"] ."</li>";
-    echo "<li>" . $ligne["race"] ."</li>";
-    echo "<li>" . $ligne["birthdate"] ."</li>";
-    echo "<li>" . $ligne["is_good"] ."</li>";
-    echo "</ul>";
+    $chien = new SmallDoggo($ligne["name"],
+            $ligne["race"],
+            new DateTime($ligne["birthdate"]),
+            $ligne["is_good"],
+            $ligne["id"]);
+    $chiens[] = $chien; 
 }
-var_dump($ligne);
+//echo '<pre>';
+//var_dump($chiens);
+//echo '</pre>';
+
+/*
+ * faire en sorte que dans $id = n; puisse selectionner le chien portant son id propre.
+*/
+
+$id = 1;
 } catch (PDOException $exception) {
     echo $exception->getMessage();
 }

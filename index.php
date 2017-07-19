@@ -1,5 +1,9 @@
 <?php
-
+//test function GLOBAL.
+function  test() {
+    echo "Coucou je suis la function Global";
+}
+test();
 //Concernant le spl_autoload pour qu'il prenne en charge les majuscule.
 function myLoader($classname) {
     $class = str_replace("\\", "/", $classname);
@@ -33,11 +37,14 @@ try {
 //On crée une instance de pdo en lui fournissant le domaine ou
 //se trouve notre bdd musql, on lui indique le nom de la bdd
 //a laquelle on se connecte avec dbname
-//puis on lui donne le username et le password en deuxieme et troisieme argument.?
+//puis on lui donne le username et le passwoxrd en deuxieme et troisieme argument.?
 
 $db = new PDO("mysql:host=localhost;dbname=first_db", 
         "solocrako", //identifiant 
         "simplon3"); //Mdp
+//On paramètre PDO afin qu'il nous renvoie les erreurs SQL.
+$db->setAttribute(PDO::ATTR_ERRMODE,
+        PDO::ERRMODE_EXCEPTION);
 //On utilise la méthode query de notre db PDO qui attend
 //en argument une requete SQL classique.
 //Ici on sélectione tout les petit_chien.
@@ -70,11 +77,12 @@ while($ligne = $query->fetch()) {
             new DateTime($ligne["birthdate"]),
             $ligne["is_good"],
             $ligne["id"]);
-    $chiens[] = $chien; 
+    $chiens[] = $chien;
 }
-//echo '<pre>';
-//var_dump($chiens);
-//echo '</pre>';
+//TEST 
+echo '<pre>';
+var_dump($chiens);
+echo '</pre>';
 
 /*
  * faire en sorte que dans $id = n; puisse selectionner le chien portant son id propre.
